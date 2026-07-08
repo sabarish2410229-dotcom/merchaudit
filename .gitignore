@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.streamlit/secrets.toml
+*.log
+.DS_Store
+.ipynb_checkpoints/
+data/*.csv
+!data/sample_merchants.csv
+models/*.pkl
+.pytest_cache/
