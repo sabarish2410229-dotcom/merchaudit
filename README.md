@@ -93,16 +93,6 @@ streamlit run app.py
 
 The dashboard defaults to the bundled `data/sample_merchants.csv`. Use the sidebar uploader to score a different CSV — it needs the same columns (see `merchaudit/config.py` → `ANOMALY_FEATURES`, plus `merchant_id`, `country_code`, `tax_id`, `chargeback_rate_pct`).
 
-### Deploying to Railway
-
-1. Push this repo to GitHub.
-2. In Railway: **New Project → Deploy from GitHub repo** → select this repo.
-3. Railway auto-detects Python via Nixpacks and uses the `Procfile` / `railway.json` start command.
-4. No environment variables are required for the demo dataset.
-5. Railway provides a public `*.up.railway.app` URL once deployed.
-
----
-
 ## Known Limitations & Future Work
 
 This project was scoped as a demonstration of the two-layer architecture, not a production compliance system. Honest gaps, in order of what a production version would need next:
