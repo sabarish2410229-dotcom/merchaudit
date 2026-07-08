@@ -89,30 +89,6 @@ uploader to score a different CSV — it just needs the same columns (see
 `merchaudit/config.py` → `ANOMALY_FEATURES` plus `country_code`, `tax_id`,
 `chargeback_rate_pct`, `merchant_id`).
 
-## Deploying to Railway
-
-1. Push this repo to GitHub.
-2. In Railway: **New Project → Deploy from GitHub repo** → select this repo.
-3. Railway auto-detects Python via Nixpacks and uses the `Procfile` / `railway.json`
-   start command (`streamlit run app.py --server.port $PORT ...`).
-4. No environment variables are required for the demo dataset. If you wire up a real
-   data source, add secrets under Railway's **Variables** tab.
-5. Once deployed, Railway gives you a public `*.up.railway.app` URL for the dashboard.
-
-## Interview Talking Points
-
-- **Why two layers, not just ML?** Compliance rules (sanctions lists, tax ID formats)
-  are legal requirements with zero tolerance for ambiguity — you don't want a model
-  "learning" its way around a sanctions list. Deterministic rules handle the
-  non-negotiables; ML handles the fuzzy, evolving patterns rules can't anticipate.
-- **Why unsupervised (Isolation Forest) instead of a classifier?** Labeled fraud data
-  goes stale — bad actors adapt faster than labels get collected. Isolation Forest
-  needs no fraud labels at all; it flags merchants whose *feature profile* doesn't fit
-  the population, which keeps working as fraud patterns shift.
-- **Known limitation:** Isolation Forest scores each merchant independently. It can't
-  see that five "unrelated" merchants share a bank account or IP — that requires a
-  network/graph layer, which is a natural next step for this project.
-
 ## Status
 
 🚧 Under active development — see commit history for progress.
