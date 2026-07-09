@@ -1,4 +1,4 @@
-__pycache__/
+﻿__pycache__/
 *.py[cod]
 *.egg-info/
 .venv/
@@ -11,4 +11,7 @@ venv/
 data/*.csv
 !data/sample_merchants.csv
 models/*.pkl
+models/**/*.joblib
+models/**/metadata.json
+*.db
 .pytest_cache/

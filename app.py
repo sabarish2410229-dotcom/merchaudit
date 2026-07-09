@@ -1,9 +1,15 @@
-"""
+﻿"""
 MerchAudit — Analyst Dashboard (Streamlit)
 
 Upload merchant data (or use the bundled sample), run it through both
 defense layers, and review the resulting risk reports and case detail.
+
+Uses the same train-once/infer-many model as the API (see
+backend/ml/train_model.py) so scores are consistent across both surfaces,
+instead of silently refitting a brand-new model on every dashboard run.
 """
+
+import os
 
 import pandas as pd
 import plotly.express as px
@@ -13,6 +19,8 @@ from merchaudit.anomaly_engine import AnomalyEngine
 from merchaudit.risk_engine import build_risk_reports, reports_to_dataframe
 
 st.set_page_config(page_title="MerchAudit", page_icon="🛡️", layout="wide")
+
+MODEL_DIR = os.getenv("MODEL_DIR", "models/current")
 
 BAND_COLORS = {
     "LOW": "#2E7D32",
@@ -28,15 +36,30 @@ def load_default_data() -> pd.DataFrame:
 
 
 @st.cache_resource(show_spinner=False)
-def get_fitted_engine(df: pd.DataFrame) -> AnomalyEngine:
-    engine = AnomalyEngine()
-    engine.fit(df)
-    return engine
+def get_engine() -> tuple[AnomalyEngine | None, str]:
+    """
+    Load the persisted train-once model. Returns (engine, status_message).
+    Falls back to fitting on the currently-loaded data only if no trained
+    model exists yet, so the dashboard still works before you've run
+    backend/ml/train_model.py, but prefers the persisted model whenever
+    it's available (matches production behavior, not a fresh fit each run).
+    """
+    try:
+        engine = AnomalyEngine.load(MODEL_DIR)
+        return engine, f"Using trained model (version: {engine.model_version})"
+    except FileNotFoundError:
+        return None, "No trained model found — run `python backend/ml/train_model.py` for consistent scoring."
 
 
 def run_pipeline(df: pd.DataFrame) -> pd.DataFrame:
-    engine = AnomalyEngine()
-    scored = engine.fit_score(df)
+    engine, _ = get_engine()
+    if engine is None:
+        # Dev-mode fallback only: fits on whatever is currently loaded.
+        # Scores from this path are NOT comparable across runs/uploads.
+        engine = AnomalyEngine()
+        scored = engine.fit_score(df)
+    else:
+        scored = engine.score(df)
     reports = build_risk_reports(df, scored)
     report_df = reports_to_dataframe(reports)
     return df.merge(report_df, on="merchant_id")
@@ -60,6 +83,8 @@ else:
     st.sidebar.info(f"Using bundled sample data ({len(df_raw)} merchants).")
 
 st.sidebar.markdown("---")
+_, model_status = get_engine()
+st.sidebar.caption(f"🤖 {model_status}")
 st.sidebar.markdown(
     "**Layer 1** — Chargeback velocity, geofencing, tax ID validation\n\n"
     "**Layer 2** — Isolation Forest anomaly detection"
