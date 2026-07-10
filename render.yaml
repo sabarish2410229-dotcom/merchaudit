@@ -1,0 +1,16 @@
+﻿services:
+  - type: web
+    name: merchaudit-api
+    runtime: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python backend/ml/train_model.py --n 800 --seed 42 --out models/current && uvicorn backend.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FRONTEND_ORIGINS
+        value: "https://your-app.vercel.app"
+      - key: MODEL_DIR
+        value: models/current

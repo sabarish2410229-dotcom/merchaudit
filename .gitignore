@@ -15,3 +15,8 @@ models/**/*.joblib
 models/**/metadata.json
 *.db
 .pytest_cache/
+
+# --- Frontend ---
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local

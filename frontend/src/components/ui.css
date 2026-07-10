@@ -1,0 +1,210 @@
+﻿.card {
+  background: var(--paper-50);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  padding: 20px 22px;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 22px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.page-header h1 {
+  font-size: 22px;
+}
+
+.page-header p {
+  color: var(--text-600);
+  font-size: 13px;
+  margin: 4px 0 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 9px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.12s ease, transform 0.05s ease;
+}
+
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn--primary { background: var(--ink-900); color: #fff; }
+.btn--primary:hover:not(:disabled) { filter: brightness(1.25); }
+
+.btn--secondary { background: var(--paper-50); color: var(--text-900); border: 1px solid var(--line); }
+.btn--secondary:hover:not(:disabled) { background: var(--paper-0); }
+
+.btn--ghost { background: transparent; color: var(--text-600); }
+.btn--ghost:hover:not(:disabled) { color: var(--text-900); }
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.field label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-600);
+}
+
+.field input, .field select {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  font-size: 13px;
+  background: var(--paper-50);
+  color: var(--text-900);
+}
+
+.field input:focus, .field select:focus {
+  border-color: var(--brand);
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+}
+
+table.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.data-table th {
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-400);
+  font-weight: 600;
+  padding: 0 12px 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.data-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+.data-table tbody tr:hover {
+  background: var(--paper-0);
+}
+
+.data-table tbody tr {
+  cursor: pointer;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--text-400);
+}
+
+.empty-state h3 {
+  color: var(--text-600);
+  margin-bottom: 6px;
+  font-size: 15px;
+}
+
+.error-banner {
+  background: var(--risk-critical-bg);
+  color: var(--risk-critical);
+  border: 1px solid var(--risk-critical);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--text-600);
+}
+
+.metric-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.metric-card {
+  background: var(--paper-50);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+}
+
+.metric-card__label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-400);
+  font-weight: 600;
+}
+
+.metric-card__value {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 18, 32, 0.45);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 50;
+  animation: fade-in 0.15s ease;
+}
+
+.drawer {
+  width: 420px;
+  max-width: 92vw;
+  height: 100vh;
+  background: var(--paper-50);
+  padding: 28px 26px;
+  overflow-y: auto;
+  box-shadow: -8px 0 30px rgba(0,0,0,0.15);
+  animation: slide-in 0.18s ease;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-in {
+  from { transform: translateX(24px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer-backdrop, .drawer { animation: none; }
+}

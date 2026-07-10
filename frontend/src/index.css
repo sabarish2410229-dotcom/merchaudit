@@ -1,0 +1,88 @@
+﻿/* ============================================================
+   MerchAudit design tokens
+   Direction: underwriting control desk, not a marketing page.
+   Deep navy shell, restrained risk-semantic accents, monospace
+   for anything that is a number, ID, or verdict.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root {
+  /* Color */
+  --ink-900: #0B1220;       /* shell / sidebar */
+  --ink-800: #141C2E;       /* elevated panels on shell */
+  --paper-0: #F7F8FA;       /* main content background */
+  --paper-50: #FFFFFF;      /* card background */
+  --line: #E2E5EA;          /* hairline borders on paper */
+  --line-dark: #253046;     /* hairline borders on ink */
+  --text-900: #10151F;
+  --text-600: #4B5468;
+  --text-400: #8890A0;
+  --text-on-ink: #E7EAF2;
+  --text-on-ink-dim: #8A93A8;
+
+  --brand: #2F6F4E;         /* verified / trust green, used sparingly */
+  --brand-dim: #E7F0EA;
+
+  --risk-low: #2E7D32;
+  --risk-low-bg: #E9F5EA;
+  --risk-medium: #B4770A;
+  --risk-medium-bg: #FBF0DD;
+  --risk-high: #C4570A;
+  --risk-high-bg: #FBEADD;
+  --risk-critical: #B3261E;
+  --risk-critical-bg: #FBE7E5;
+
+  /* Type */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Layout */
+  --sidebar-w: 248px;
+  --radius: 8px;
+  --radius-sm: 5px;
+  --shadow-card: 0 1px 2px rgba(16, 21, 31, 0.06), 0 1px 1px rgba(16, 21, 31, 0.04);
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper-0);
+  color: var(--text-900);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+button, input, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+a { color: inherit; }
+
+.mono {
+  font-family: var(--font-mono);
+  font-feature-settings: 'tnum';
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}

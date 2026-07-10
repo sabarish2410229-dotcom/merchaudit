@@ -1,0 +1,80 @@
+﻿.auth-screen {
+  min-height: 100vh;
+  background: var(--ink-900);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--paper-50);
+  border-radius: var(--radius);
+  padding: 32px 30px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+}
+
+.auth-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.auth-brand-mark {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 13px;
+  background: var(--brand);
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-brand-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.auth-card h2 {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.auth-card p.auth-sub {
+  color: var(--text-600);
+  font-size: 13px;
+  margin: 0 0 22px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.auth-submit {
+  margin-top: 4px;
+  width: 100%;
+}
+
+.auth-switch {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-600);
+  margin-top: 18px;
+}
+
+.auth-switch a {
+  color: var(--brand);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
